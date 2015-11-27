@@ -3,13 +3,22 @@ package firstCeasar;
 import edu.duke.*;
 
 
+
 public class CaesarCipher {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		CaesarCipher cc = new CaesarCipher();
-		cc.testCaesar();
-
+		
+		System.out.println(cc.encrypt("Can you imagine life WITHOUT the internet AND computers in your pocket?", 15));
+		System.out.println(cc.encryptTwoKeys("Can you imagine life WITHOUT the internet AND computers in your pocket?", 21, 8));
+		System.out.println(cc.decryptTwoKeys("Hfs cpwewloj loks cd Hoto kyg Cyy."));
+		System.out.println(cc.decryptTwoKeys("Aal uttx hm aal Qtct Fhljha pl Wbdl. Pvxvxlx!"));
+		
+		//cc.testTwoKeys();
+//		
+//		CommonWords cw = new CommonWords();
+//		cw.testCountWordLengths();
 	}
 	 public String encrypt(String input, int key) {
 	        //Make a StringBuilder with message (encrypted)
@@ -92,9 +101,9 @@ public class CaesarCipher {
 	        FileResource fr = new FileResource();
 	        String message = fr.asString();
 	        String encrypted = encrypt(message, key);
-	        System.out.println(encrypted);
+	        System.out.println("encrypted \n" + encrypted);
 	        String decrypted = encrypt(encrypted, 26-key);
-	        System.out.println(decrypted);
+	        System.out.println("decrypted \n" + decrypted);
 	        System.out.println(encrypt("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 15));
 	         System.out.println(encryptTwoKeys("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 8, 21));
 	    }
@@ -137,11 +146,16 @@ public class CaesarCipher {
 	        return encrypted.toString();
 	    }
 	    
-	    public void testTwoKeys(){
-	        System.out.println(encryptTwoKeys("At noon be in the conference room with your hat on for a surprise party. YELL LOUD!", 8, 21));
+	    public void decTwoKeysFile(){
+	    	FileResource fr = new FileResource();
+	        String message = fr.asString();
+	        System.out.println("dec 2 keys");
+	        System.out.println(decryptTwoKeys(message));
 	    }
+
+	    
 	    //Exercise week one - decrypt
-	     public int [] countLetters(String message){
+	     public int [] countLetters(String message){	
 	        String alph = "abcdefghijklmnopqrstuvwzyz";
 	        int [] counts = new int [26];
 	        for (int k =0; k < message.length(); k++){
@@ -159,20 +173,61 @@ public class CaesarCipher {
 	        int largest = 0;
 	        for (int i = 0; i < freqs.length; i++){
 	            if(freqs[i] > freqs[largest])
-	                largest = freqs[i];
+	                largest = i;
 	        }
 	        return largest;
 	    }
 	    
 	    public String decrypt(String encrypted){
-	        CaesarCipher cc = new CaesarCipher();
 	        int [] freqs = countLetters(encrypted);
 	        int maxDex = maxIndex(freqs);
 	        int dkey = maxDex - 4;
 	        if(maxDex < 4){
 	            dkey = 26 - (4 - maxDex);
 	        }
-	        return cc.encrypt(encrypted, 26 - dkey);
+	        return encrypt(encrypted, 26 - dkey);
 	    }
+	    
+	    String halfOfString(String message, int start){
+	    	String half = "";
+	    	for (int i = start; i < message.length(); i+=2){
+	    		half += message.charAt(i);
+	    	}
+	    	return half;
+	    }
+	    
+	    int getKey(String s){
+	    	int [] cl = countLetters(s);
+	    	int maxIndex = maxIndex(cl);
+	    	return maxIndex;
+	    }
+	    
+	    String decryptTwoKeys(String encrypted){
+	    	String first = halfOfString(encrypted, 0);
+	    	//System.out.println("f " + first);
+	    	String second = halfOfString(encrypted, 1);
+	    	//System.out.println("s " + second);
 
-}
+	    	int key1 = getKey(first);
+	    	int key2 = getKey(second);
+	    	
+	    	System.out.println("key 1: " + key1 + " key 2: " + key2);
+	    	String p1 = decrypt(first);
+	    	//System.out.println("p1 " + p1);
+
+	    	String p2 = decrypt(second);
+	    	//System.out.println("p2 " + p2);
+
+	    	String decrypted = new String();
+	    	int max = p1.length() > p2.length() ? p1.length() : p2.length();
+	    	for(int i = 0; i < max -1 ; i++){
+	    		decrypted += p1.charAt(i);
+	    		decrypted += p2.charAt(i);
+	    	}
+	    	if(decrypted.length() != encrypted.length()){
+	    		decrypted += p1.charAt(p1.length()- 1);
+	    	}
+	    	return decrypted;
+	    }
+	    
+}	
