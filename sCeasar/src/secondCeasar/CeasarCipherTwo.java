@@ -51,7 +51,7 @@ public class CeasarCipherTwo {
 	 
 	 public String decrypt(String input){
 		 CeasarCipherTwo cct = new CeasarCipherTwo(26 - this.mainKey1, 26 - this.mainKey2); 
-		 System.out.println(26 - this.mainKey1);
+	//	 System.out.println(26 - this.mainKey1);
 	     return cct.encrypt(input);
 	 }
 	 
@@ -89,8 +89,8 @@ public class CeasarCipherTwo {
 	    	char maxC = this.alphabet.charAt(maxIndex);
 	    	maxIndex = this.shiftedAlphabet2.indexOf(maxC);
 
-	    System.out.println("entrada: " + input);
-	    	System.out.println(this.shiftedAlphabet2);
+	  //  System.out.println("entrada: " + input);
+	   // 	System.out.println(this.shiftedAlphabet2);
 	    	//System.out.println(maxValue);
 	    	return maxIndex;
 	   }
@@ -98,10 +98,30 @@ public class CeasarCipherTwo {
 	   
 	 public String breakCeasarCipher(String input){
 		 String partOne = halfOfString(input,0);
+		 System.out.println("p1 : " + partOne);
 		 String partTwo = halfOfString(input,1);
+		 System.out.println("p2 : " + partTwo);
 		 
-		 int keyPartOne = this.shiftedAlphabet1.indexOf('a');
-		 int keyPartTwo = this.shiftedAlphabet2.indexOf('a');
+		 CeasarCipher cc = new CeasarCipher(0);
+		 
+		 
+		 
+		 
+		 String resa =  cc.breakCeasarCipher(partOne) ; //k = 19
+		 String resb = 	cc.breakCeasarCipher(input); // k = 7
+		 
+		 System.out.println(resa +  " -- b: " + resb);
+		 String resp = "";
+		 for(int i = 0; i < input.length()/2; i ++){
+				 resp += resa.charAt(i) ; 
+				 resp += resb.charAt(i);
+		 }
+		 System.out.println("RESPOSTA EEEE  : " + resp);
+
+
+		 
+		 int keyPartOne = getKey(partOne);
+		 int keyPartTwo = getKey(partTwo);
 		
 		 CeasarCipherTwo cct = new CeasarCipherTwo(keyPartOne, keyPartTwo);
 	     return cct.encrypt(input);

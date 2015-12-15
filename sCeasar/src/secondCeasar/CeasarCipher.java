@@ -18,6 +18,8 @@ public class CeasarCipher {
 		this.shiftedAlphabet = alphabet.substring(key)+
 		        alphabet.substring(0,key);
 		this.mainKey = key;
+		
+		System.out.println("chave: " + key);
 	}
 	
 	public String encrypt(String input){
@@ -85,23 +87,68 @@ public class CeasarCipher {
    public void simpleTests(CeasarCipher cc){
 	   FileResource fr = new FileResource();
        String message = fr.asString();
-       System.out.println("Encrypted: " + cc.encrypt(message));
-       System.out.println("Decrypted: " + cc.breakCeasarCipher(cc.encrypt(message)));
+      // System.out.println("Encrypted: " + cc.encrypt(message));
+      // System.out.println("Decrypted: " + cc.breakCeasarCipher(cc.encrypt(message)));
    }
 
    
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-	    CeasarCipher cc = new CeasarCipher(17);
+		//String message = "Can you imagine life WITHOUT the internet AND computers in your pocket?";
+		String message2 = "Can you imagine life WITHOUT the internet AND computers in your pocket?";
+	    String message6 = "Hfs cpwewloj loks cd Hoto kyg Cyy.";
+	    String message7 = "Aal uttx hm aal Qtct Fhljha pl Wbdl. Pvxvxlx!";
+	    String message8 = "Uybi Gfqgykii Jgziegv Uigeixdiex Smiizzin";
+	    
+		//CeasarCipher cc = new CeasarCipher(15);
 	    CeasarCipherTwo cct = new CeasarCipherTwo(0,0);
-	    FileResource fr = new FileResource();
-	    String message = fr.asString();
+	  // FileResource fr = new FileResource();
+	  //  String message = fr.asString();
 	  
-	   //System.out.println("Encrypted two: " + cct.encrypt(message));
+	  // System.out.println("exercicio 1: " + cc.encrypt(message));
+	 //  System.out.println("exercicio 2: " + cct.encrypt(message2));
+	  // System.out.println("exercicio 6: " + cct.decrypt(message6));
+	    System.out.println("exercicio 8: " + cct.breakCeasarCipher(message8));
+	    
+	   // TestSimple t = new TestSimple();
+		//   System.out.println("exercicio 13: ");
+
+	   // t.print();
+
+
+
 	    //System.out.println("Decrypted two: " + cct.decrypt(cct.encrypt(message)));
-	    System.out.println("Decrypted two: " + cct.breakCeasarCipher(cct.encrypt(message)));
+	   // System.out.println("Decrypted two: " + cct.breakCeasarCipher(cct.encrypt(message)));
 
 	    //cc.simpleTests(cc);
 	}
 
 }
+
+ class Simple{ 
+    private String word; 
+    private String phrase; 
+    public Simple(int number, String w) { 	
+         word = w; 	
+         phrase = mystery(number, w);          
+    }   
+    private String mystery(int num, String s) {  	
+         String answer = "";  	
+         for (int k=0; k<num; k++) {     	
+              answer = answer + s;  	
+         }  	
+         return answer; 
+    } 
+
+    public String toString() { 	
+         return phrase + " is " + word + " repeated";
+    }
+}
+
+ class TestSimple{
+    public void print() {  	
+         Simple item = new Simple(3, "blue");     	
+         System.out.println(item);             
+    }      
+}
+
