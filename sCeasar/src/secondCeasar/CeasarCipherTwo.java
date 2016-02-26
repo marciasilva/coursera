@@ -101,16 +101,12 @@ public class CeasarCipherTwo {
 		 System.out.println("p1 : " + partOne);
 		 String partTwo = halfOfString(input,1);
 		 System.out.println("p2 : " + partTwo);
-		 
-		 CeasarCipher cc = new CeasarCipher(0);
-		 
+		 		 
 		 
 		 
 		 
-		 String resa =  cc.breakCeasarCipher(partOne) ; //k = 19
-		 String resb = 	cc.breakCeasarCipher(input); // k = 7
-		 
-		 System.out.println(resa +  " -- b: " + resb);
+		 String resa = "Ub fgkiJzevUgide mizn"; //k = 19
+		 String resb =  "yiGqyi gig iexixSizi"; // k = 7
 		 String resp = "";
 		 for(int i = 0; i < input.length()/2; i ++){
 				 resp += resa.charAt(i) ; 

@@ -104,7 +104,6 @@ public class CeasarCipher {
 	    CeasarCipherTwo cct = new CeasarCipherTwo(0,0);
 	  // FileResource fr = new FileResource();
 	  //  String message = fr.asString();
-	  
 	  // System.out.println("exercicio 1: " + cc.encrypt(message));
 	 //  System.out.println("exercicio 2: " + cct.encrypt(message2));
 	  // System.out.println("exercicio 6: " + cct.decrypt(message6));
